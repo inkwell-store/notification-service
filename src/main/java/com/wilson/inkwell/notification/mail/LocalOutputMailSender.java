@@ -24,14 +24,14 @@ import lombok.RequiredArgsConstructor;
 public class LocalOutputMailSender implements Sender {
 
     private final EmailRepository emailRepository;
-    private final Path EMAIL_SINK_PATH = Path.of("/home/wilson/Desktop/projects/inkwell-store/emails");
+    private final Path EMAIL_DUMP_PATH = Path.of("email-dump"); // creates a folder at the root of the project
 
     public LocalOutputMailSender(EmailRepository emailRepository) {
         this.emailRepository = emailRepository;
 
         // create the folder dump if it doesn't exist yet
         try {
-            Files.createDirectories(EMAIL_SINK_PATH);
+            Files.createDirectories(EMAIL_DUMP_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class LocalOutputMailSender implements Sender {
         
         try {
 
-            Files.writeString(EMAIL_SINK_PATH.resolve(fileName), content, StandardOpenOption.CREATE_NEW);
+            Files.writeString(EMAIL_DUMP_PATH.resolve(fileName), content, StandardOpenOption.CREATE_NEW);
             // update the entity status
             emailEntity.setEmailStatus(EmailStatus.SENT);
 

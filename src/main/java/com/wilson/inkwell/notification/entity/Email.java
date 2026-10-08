@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.wilson.inkwell.notification.enums.EmailStatus;
 import com.wilson.inkwell.notification.enums.EmailSubjectType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -39,15 +40,17 @@ public class Email {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "subject_type", nullable = false)
     private EmailSubjectType subjectType;
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "email_status", nullable = false)
     private EmailStatus emailStatus;
 
-    private String recipient;
+    @Column(name = "recipient", nullable = false)
+    private String recipient; // is the email address
 
-    // private String body;
-
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
 }
