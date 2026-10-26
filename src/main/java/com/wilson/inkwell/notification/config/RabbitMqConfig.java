@@ -12,12 +12,13 @@ public class RabbitMqConfig {
 
     @Bean
     CachingConnectionFactory cachingConnectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("rabbitmq-service");
 
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
+        connectionFactory.setUsername("notification-service");
+        connectionFactory.setPassword("notification-service");
         connectionFactory.setCacheMode(CachingConnectionFactory.CacheMode.CHANNEL);
-        connectionFactory.setChannelCacheSize(25);
+        connectionFactory.setPort(5672);
+        connectionFactory.setVirtualHost("development_vhost");
 
         return connectionFactory;
     }

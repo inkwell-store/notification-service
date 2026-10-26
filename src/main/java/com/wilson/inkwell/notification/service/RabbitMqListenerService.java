@@ -16,7 +16,7 @@ public class RabbitMqListenerService {
         this.notificationService = notificationService;
     }
 
-    @RabbitListener(queues = "notification.credential-queue")
+    @RabbitListener(queues = "notification.credential.queue")
     public void listenToCredentialCreationEvent(@Payload CredentialCreationEvent event) {
         notificationService.processCredentialCreation(event);
     }
